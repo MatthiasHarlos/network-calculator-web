@@ -5,30 +5,67 @@
     <title>Network calculator</title>
 </head>
 <body>
-<h1>Eingegebene IP-Addresse</h1>
-<div th:text="${iPAddress}"></div>
-<h1>Eingegebene Subnetzmaske</h1>
-<div th:text="${snm}"></div>
-<h1>Binäre IP-Addresse</h1>
-<div th:text="${iPAddress.toBinaryString()}"></div>
-<h1>Binäre Subnetzmaske</h1>
-<div th:text="${snm.toBinaryString()}"></div>
-<h1>Netz ID</h1>
-<div th:text="${netid}"></div>
-<h1>Broadcast</h1>
-<div th:text="${broadcast}"></div>
-<h1>mögliche Hosts</h1>
-<div th:text="${hosts}"></div>
-<h1>IPs</h1>
-<div th:text="${firstipandlast}"></div>
-<h1>Alle möglichen Netze</h1>
+
+<h1>Netzwerkrechner</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th> </th>
+        <th>IP-Addresse</th>
+        <th>Subnetzmaske</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td> Eingabe = </td>
+        <td th:text="${iPAddress}"></td>
+        <td th:text="${snm}"></td>
+    </tr>
+    <tr>
+        <td> Binär = </td>
+        <td th:text="${iPAddress.toBinaryString()}"></td>
+        <td th:text="${snm.toBinaryString()}"></td>
+    </tr>
+    </tbody>
+    <thead>
+    <tr>
+        <th> </th>
+        <th>Netz-ID</th>
+        <th>Broadcast</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td> Result = </td>
+        <td th:text="${netid}"></td>
+        <td th:text="${broadcast}"></td>
+    </tr>
+    </tbody>
+    <thead>
+    <tr>
+        <th> --- </th>
+        <th> Weitere... </th>
+        <th> Ergebnisse! </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td> Mögliche Hosts = </td>
+        <td th:text="${hosts}"></td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> IPs = </td>
+        <td th:text="${firstip}"></td>
+        <td th:text="${lastip}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Alle möglichen Netze</h3>
 
 <th:block th:each="network : ${allnetworks}">
 <div th:text="${network}"></div>
 </th:block>
-
-<h1>Exception</h1>
-<div th:text="${exception}"></div>
-
 </body>
 </html>

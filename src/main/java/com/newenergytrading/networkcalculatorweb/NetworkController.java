@@ -19,16 +19,20 @@ public class NetworkController {
 
     @GetMapping("calculate")
     public String calculator(Model model, @RequestParam String ipString, @RequestParam String snmString) {
-        boolean error = false;
-        IPAddress iPAddress = new IPAddress();
-        Subnetmask snm = new Subnetmask();
+        IPAddress iPAddress;
+        Subnetmask snm;
         try {
             iPAddress = new IPAddress(ipString);
-            snm = new Subnetmask(snmString);
         } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "Geben Sie eine gültige IP-Addresse an!");
             return "error-template";
         }
-
+        try {
+            snm = new Subnetmask(snmString);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "Geben Sie eine gültige SNM ein!");
+            return "error-template";
+        }
             model.addAttribute("iPAddress", iPAddress);
             model.addAttribute("snm", snm);
             IPAddress netID = calculateNetID(iPAddress, snm);
@@ -37,10 +41,10 @@ public class NetworkController {
             model.addAttribute("broadcast", broadcast);
             int hosts = snm.getHosts();
             model.addAttribute("hosts", hosts);
-
             Networks simpleNetwork = new Networks();
             simpleNetwork.setSimpleFirstAndLastIP(netID, broadcast);
-            model.addAttribute("firstipandlast", simpleNetwork.getSimpleFirstAndLastIP());
+            model.addAttribute("firstip", simpleNetwork.getSimpleFirstAndLastIP().get(0));
+        model.addAttribute("lastip", simpleNetwork.getSimpleFirstAndLastIP().get(1));
             Networks networks = new Networks(netID, snm, broadcast, hosts);
             model.addAttribute("allnetworks", networks.getNetworks());
             return "networkcalculate-template";
