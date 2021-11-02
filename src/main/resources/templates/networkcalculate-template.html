@@ -5,7 +5,6 @@
     <title>Network calculator</title>
 </head>
 <body>
-
 <h1>Netzwerkrechner</h1>
 <table border="1">
     <thead>
@@ -61,11 +60,30 @@
     </tr>
     </tbody>
 </table>
-
 <h3>Alle möglichen Netze</h3>
-
+<table border="1">
+    <thead>
+    <tr>
+        <th> <span th:text="${allnetworks.size()}"></span> Netze </th>
+        <th> ID </th>
+        <th> Broadcast </th>
+        <th> Erste IP </th>
+        <th> Letzte IP </th>
+        <th> Mögliche Hosts </th>
+    </tr>
+    </thead>
 <th:block th:each="network : ${allnetworks}">
-<div th:text="${network}"></div>
+        <tbody>
+        <tr>
+            <td>Netzwerk <span th:text="${(networkStat.index+1)}"></span> = </td>
+            <td th:text="${network.get(0).substring(network.get(0).indexOf('=')+2)}"></td>
+            <td th:text="${network.get(1).substring(network.get(1).indexOf('=')+2)}"></td>
+            <td th:text="${network.get(2).substring(network.get(2).indexOf('=')+2)}"></td>
+            <td th:text="${network.get(3).substring(network.get(3).indexOf('=')+2)}"></td>
+            <td th:text="${network.get(4).substring(network.get(4).indexOf('=')+2)}"></td>
+        </tr>
+        </tbody>
 </th:block>
+</table>
 </body>
 </html>
