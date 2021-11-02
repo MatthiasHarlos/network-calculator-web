@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Network calculator</title>
+</head>
+<body>
+<h1>Eingegebene IP-Addresse</h1>
+<div th:text="${iPAddress}"></div>
+<h1>Eingegebene Subnetzmaske</h1>
+<div th:text="${snm}"></div>
+<h1>Binäre IP-Addresse</h1>
+<div th:text="${iPAddress.toBinaryString()}"></div>
+<h1>Binäre Subnetzmaske</h1>
+<div th:text="${snm.toBinaryString()}"></div>
+<h1>Netz ID</h1>
+<div th:text="${netid}"></div>
+<h1>Broadcast</h1>
+<div th:text="${broadcast}"></div>
+<h1>mögliche Hosts</h1>
+<div th:text="${hosts}"></div>
+<h1>IPs</h1>
+<div th:text="${firstipandlast}"></div>
+<h1>Alle möglichen Netze</h1>
+<div th:text="${networks}"></div>
+
+
+</body>
+</html>
