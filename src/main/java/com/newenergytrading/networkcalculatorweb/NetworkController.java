@@ -12,9 +12,9 @@ import java.util.Objects;
 @Controller
 public class NetworkController {
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello " + "test" + "test" + "!");
+    @GetMapping("/")
+    public void handleRequest(){
+        throw new RuntimeException("test exception");
     }
 
     @GetMapping("calculate")

@@ -2,9 +2,16 @@ package com.newenergytrading.networkcalculatorweb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class NetworkCalculatorWebApplication {
+public class NetworkCalculatorWebApplication extends SpringBootServletInitializer {
+
+	@Override
+	protected SpringApplicationBuilder configure (SpringApplicationBuilder builder) {
+		return builder.sources(NetworkCalculatorWebApplication.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(NetworkCalculatorWebApplication.class, args);
