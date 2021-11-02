@@ -26,11 +26,9 @@ public class NetworkController {
             iPAddress = new IPAddress(ipString);
             snm = new Subnetmask(snmString);
         } catch (IllegalArgumentException e) {
-            error = true;
+            return "error-template";
         }
-        if (error) {
-            model.addAttribute("exception", "Falscher Input");
-        } else {
+
             model.addAttribute("iPAddress", iPAddress);
             model.addAttribute("snm", snm);
             IPAddress netID = calculateNetID(iPAddress, snm);
@@ -45,10 +43,8 @@ public class NetworkController {
             model.addAttribute("firstipandlast", simpleNetwork.getSimpleFirstAndLastIP());
             Networks networks = new Networks(netID, snm, broadcast, hosts);
             model.addAttribute("allnetworks", networks.getNetworks());
-        }
+            return "networkcalculate-template";
 
-
-        return "networkcalculate-template";
     }
 
     private static IPAddress calculateNetID(IPAddress ip, Subnetmask snm) {
