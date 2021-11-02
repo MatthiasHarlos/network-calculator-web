@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -17,22 +18,35 @@ public class NetworkController {
     }
 
     @GetMapping("calculate")
-    public String calculator(Model model, @RequestParam IPAddress iPAddress, @RequestParam Subnetmask snm) {
-        model.addAttribute("iPAddress", iPAddress);
-        model.addAttribute("snm", snm);
-        //editInput();
-        IPAddress netID = calculateNetID(iPAddress, snm);
-        model.addAttribute("netid", netID);
-        IPAddress broadcast = calculateBroadcastIp(netID, snm);
-        model.addAttribute("broadcast", broadcast);
-        int hosts = snm.getHosts();
-        model.addAttribute("hosts", hosts);
+    public String calculator(Model model, @RequestParam String ipString, @RequestParam String snmString) {
+        boolean error = false;
+        IPAddress iPAddress = new IPAddress();
+        Subnetmask snm = new Subnetmask();
+        try {
+            iPAddress = new IPAddress(ipString);
+            snm = new Subnetmask(snmString);
+        } catch (IllegalArgumentException e) {
+            error = true;
+        }
+        if (error) {
+            model.addAttribute("exception", "Falscher Input");
+        } else {
+            model.addAttribute("iPAddress", iPAddress);
+            model.addAttribute("snm", snm);
+            IPAddress netID = calculateNetID(iPAddress, snm);
+            model.addAttribute("netid", netID);
+            IPAddress broadcast = calculateBroadcastIp(netID, snm);
+            model.addAttribute("broadcast", broadcast);
+            int hosts = snm.getHosts();
+            model.addAttribute("hosts", hosts);
 
-        Networks simpleNetwork = new Networks();
-        simpleNetwork.setSimpleFirstAndLastIP(netID, broadcast);
-        model.addAttribute("firstipandlast", simpleNetwork.getSimpleFirstAndLastIP());
-        Networks networks = new Networks(netID, snm, broadcast, hosts);
-        model.addAttribute("networks", networks.getNetworks());
+            Networks simpleNetwork = new Networks();
+            simpleNetwork.setSimpleFirstAndLastIP(netID, broadcast);
+            model.addAttribute("firstipandlast", simpleNetwork.getSimpleFirstAndLastIP());
+            Networks networks = new Networks(netID, snm, broadcast, hosts);
+            model.addAttribute("allnetworks", networks.getNetworks());
+        }
+
 
         return "networkcalculate-template";
     }
