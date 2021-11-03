@@ -1,11 +1,11 @@
 package com.newenergytrading.networkcalculatorweb;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
 
 public class IPAddress{
     private int first;

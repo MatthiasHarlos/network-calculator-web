@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Netzwerkrechner</h1>
-<table border="1">
+<table border="1"; style="color:green">
     <thead>
     <tr>
         <th> </th>
@@ -60,7 +60,7 @@
     </tr>
     </tbody>
 </table>
-<div th:if="${allnetworks.size() > 1}">
+<div th:if="${allnetworks.size() > 1}"; style="background:gold">
 <h3>Alle möglichen Netze</h3>
 <table border="1">
     <thead>
@@ -87,5 +87,6 @@
 </th:block>
 </table>
 </div>
+<a href="/formular"  title="LOS GEHTS!"> Formular</a>
 </body>
 </html>
