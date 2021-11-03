@@ -70,7 +70,7 @@ border-radius: 10px;
 </head>
 <body>
 <h1>Keine gültige URL!</h1>
-<button class="glow-on-hover" onclick="window.location.href='/input-template';"> Formular</button>
+<button class="glow-on-hover" onclick="window.location.href='/network-calculator-web/input-template';"> Formular</button>
 <div th:text="§{exception}"></div>
 </body>
 </html>
