@@ -2,35 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Netzwerkrechner</title>
+    <title>Error</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
     <style>
-    body {
-    background: dimGrey;
-    text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
-       }
-    div.second-background {
-            width: auto;
-            height: 700px;
-            background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
-            background-repeat: no-repeat;
-            background-size: 250px;
-            background-position: top;
-            transform: translateY(+10%);
-            text-align: bottom;
-    }
-        div {
-        transform: translateY(+500%);
-            margin: 0 auto;
+              body {
+              transform: translateY(+250%);
+    background-image: url(http://sfwallpaper.com/images/matrix-gif-wallpaper-12.jpg);
+    background-size: cover;
+    color: goldenrod;
+    margin: 0 auto;
             text-align: center;
-        }
-          label {
-           display: inline-block;
-           width: 120px;
-        }
-        div.button-div {
-        }
-        .glow-on-hover {
+    }
+    .glow-on-hover {
     width: 110px;
     height: 25px;
     border: none;
@@ -86,26 +69,8 @@ border-radius: 10px;
     </style>
 </head>
 <body>
-<div class="second-background">
-
-<h1>Geben Sie eine IP und Subnetzmaske ein!</h1>
-<form method="get" action="calculate">
-    <div>
-        <label for="ipString">IP-Addresse</label>
-        <input type="text" name="ipString" id="ipString" placeholder="z.B: 192.168.1.1" maxlength="15"/>
-    </div>
-    <div>
-        <label for="snmString">Subnetzmaske</label>
-        <input type="text" name="snmString" id="snmString" placeholder="z.B: 255.255.255.0" maxlength="15"/>
-    </div>
-    <div class="button-div">
-        <button class="glow-on-hover" type="submit"> berechnen!</button>
-        <button class="glow-on-hover" type="reset"> Reset!</button>
-    </div>
-
-
-
-</form>
-</div>
+<h1>Keine gültige URL!</h1>
+<button class="glow-on-hover" onclick="window.location.href='/formular';"> Formular</button>
+<div th:text="§{exception}"></div>
 </body>
 </html>

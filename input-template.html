@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Netzwerkrechner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
+    <style>
+
+    body {
+    background: dimGrey;
+    text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
+       }
+    div.second-background {
+            width: auto;
+            height: 700px;
+            background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
+            background-repeat: no-repeat;
+            background-size: 250px;
+            background-position: top;
+            transform: translateY(+10%);
+            text-align: bottom;
+
+    }
+        div {
+        transform: translateY(+500%);
+            margin: 0 auto;
+            text-align: center;
+        }
+          label {
+           display: inline-block;
+           width: 120px;
+        }
+        div.button-div {
+
+        }
+        .glow-on-hover {
+    width: 110px;
+    height: 25px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+
+    </style>
+</head>
+<body>
+<div class="second-background">
+
+<h1>Geben Sie eine IP und Subnetzmaske ein!</h1>
+<form method="get" action="calculate">
+    <div>
+        <label for="ipString">IP-Addresse</label>
+        <input type="text" name="ipString" id="ipString" placeholder="z.B: 192.168.1.1" maxlength="15"/>
+    </div>
+    <div>
+        <label for="snmString">Subnetzmaske</label>
+        <input type="text" name="snmString" id="snmString" placeholder="z.B: 255.255.255.0" maxlength="15"/>
+    </div>
+    <div class="button-div">
+        <button class="glow-on-hover" type="submit"> berechnen!</button>
+        <button class="glow-on-hover" type="reset"> Reset!</button>
+    </div>
+
+
+
+</form>
+</div>
+</body>
+</html>
