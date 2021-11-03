@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Netzwerkrechner</title>
+</head>
+<body>
+<h1>Geben Sie eine IP und Subnetzmaske ein!</h1>
+<form  method="get" action="calculate">
+    <div>
+        <label for="ipString">IP-Addresse</label>
+        <input type="text" name="ipString" id="ipString" placeholder="z.B: 192.168.1.1" maxlength="15"/>
+    </div>
+    <div>
+        <label for="snmString">Subnetzmaske</label>
+        <input type="text" name="snmString" id="snmString" placeholder="z.B: 255.255.255.0" maxlength="15"/>
+    </div>
+    <button type="submit"> berechnen! </button>
+</form>
+</body>
+</html>

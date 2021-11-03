@@ -1,12 +1,9 @@
 package com.newenergytrading.networkcalculatorweb;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -16,6 +13,12 @@ public class NetworkController {
     public void handleRequest(){
         throw new RuntimeException("test exception");
     }
+
+    @GetMapping("formular")
+    public String newFoo(Model model) {
+        return "input-template";
+    }
+
 
     @GetMapping("calculate")
     public String calculator(Model model, @RequestParam String ipString, @RequestParam String snmString) {
