@@ -7,25 +7,31 @@
     <style>
 
     body {
-    background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
-     background-repeat: no-repeat;
-     background-size: 250px;
+    background: dimGrey;
+    color: goldenrod;
     }
     div.second-background {
-        margin-top: 200px;
+            width: auto;
+            height: 700px;
+            background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
+            background-repeat: no-repeat;
+            background-size: 250px;
+            background-position: top;
+            transform: translateY(+10%);
+            text-align: bottom;
+
     }
         div {
-            margin-top: 10px;
-            transform:translate(+5%);
+        transform: translateY(+500%);
+            margin: 0 auto;
+            text-align: center;
         }
           label {
            display: inline-block;
            width: 120px;
         }
         div.button-div {
-        margin-top: 10px;
-        transform:translate(+10%);
-        border-radius: 50px 50px 50px 50px;
+
         }
         .glow-on-hover {
     width: 110px;
@@ -92,6 +98,7 @@
 </head>
 <body>
 <div class="second-background">
+
 <h1>Geben Sie eine IP und Subnetzmaske ein!</h1>
 <form method="get" action="calculate">
     <div>
