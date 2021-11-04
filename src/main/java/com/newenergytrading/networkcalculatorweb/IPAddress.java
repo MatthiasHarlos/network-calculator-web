@@ -1,13 +1,14 @@
 package com.newenergytrading.networkcalculatorweb;
 
 import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 
-public class IPAddress{
+public class IPAddress {
     private int first;
     private int second;
     private int third;
@@ -28,7 +29,7 @@ public class IPAddress{
         for (String part : parts) {
             componentsInt.add(Integer.parseInt(part));
         }
-        if (componentsInt.get(0) <1) {
+        if (componentsInt.get(0) < 1) {
             throw new IllegalArgumentException("IP darf nicht mit 0 beginnen!");
         }
         setFirst(componentsInt.get(0));
@@ -37,7 +38,8 @@ public class IPAddress{
         setFourth(componentsInt.get(3));
     }
 
-    public IPAddress() {}
+    public IPAddress() {
+    }
 
     public IPAddress(int first, int second, int third, int fourth) {
         this.setFirst(first);
@@ -117,6 +119,7 @@ public class IPAddress{
             throw new IllegalArgumentException(component + " out of Range");
         }
     }
+
     public IPAddress logicalAnd(IPAddress another) {
         Objects.requireNonNull(another);
         int first = this.getFirst() & another.getFirst();
