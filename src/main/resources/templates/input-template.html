@@ -110,9 +110,9 @@ p.fielderror-detail {
             <span>
                 <label for="shortsnm">/</label>
             <input style="width: 20px" type="text" name="shortsnm" id="shortsnm" placeholder="24" maxlength="2"/>
-                <span class="fielderror-container" th:if="${#fields.hasErrors('ipString')}">
+                <p class="fielderror-container" th:if="${#fields.hasErrors('ipString')}">
                 <span class="fielderror-detail" th:each="err : ${#fields.errors('ipString')}" th:text="${err}"></span>
-            </span>
+            </p>
             <span class="fielderror-container" th:if="${#fields.hasErrors('shortsnm')}">
                 <span class="fielderror-detail" th:each="err : ${#fields.errors('shortsnm')}" th:text="${err}"></span>
             </span>
