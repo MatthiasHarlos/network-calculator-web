@@ -7,9 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,16 +25,12 @@ public class NetworkController {
         return "input-template";
     }
 
-
     @PostMapping("calculate")
     public String calculator(Model model, @Valid NetworkInputForm networkInputForm, BindingResult bindingResult) {
-
         IPAddress iPAddress;
         Subnetmask snm = null;
-
         System.out.println("form" + networkInputForm);
         System.out.println("bindingResult: " + bindingResult);
-
         Integer shortsnm = 0;
         if(networkInputForm.getShortsnm() != null) {
             shortsnm = networkInputForm.getShortsnm();
@@ -62,7 +56,7 @@ public class NetworkController {
         simpleNetwork.setSimpleFirstAndLastIP(netID, broadcast);
         model.addAttribute("firstip", simpleNetwork.getSimpleFirstAndLastIP().get(0));
         model.addAttribute("lastip", simpleNetwork.getSimpleFirstAndLastIP().get(1));
-        Networks networks = new Networks(netID, snm, broadcast, hosts);
+        Networks networks = new Networks(netID, snm, hosts);
         model.addAttribute("allnetworks", networks.getNetworks());
         return "networkcalculate-template";
     }
@@ -136,6 +130,4 @@ public class NetworkController {
                 int fourth = netId.getFourth() + invertedSnm.getFourth();
                 return new IPAddress(first, second, third, fourth);
             }
-
-
         }

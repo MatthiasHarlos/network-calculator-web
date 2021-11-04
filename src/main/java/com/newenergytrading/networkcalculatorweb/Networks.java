@@ -11,9 +11,9 @@ public class Networks {
     private int host;
 
 
-    public Networks(IPAddress iD, Subnetmask snm, IPAddress broadcast, int hosts) {
+    public Networks(IPAddress iD, Subnetmask snm, int hosts) {
         setPossibleIDs(iD, snm);
-        setPossibleBCs(broadcast, iD, snm);
+        setPossibleBCs(iD, snm);
         setPossibleIPs(snm);
         setHost(hosts);
         calculateAllNets();
@@ -71,26 +71,25 @@ public class Networks {
         }
     }
 
-    private void setPossibleBCs(IPAddress broadcast, IPAddress iD, Subnetmask snm) {
-        this.bcs.add(broadcast);
+    private void setPossibleBCs(IPAddress iD, Subnetmask snm) {
         String snmBinary = snm.toBinaryString();
         IPAddress invertedSnm = snm.invert();
         if (snmBinary.lastIndexOf("1") >= 24) {
             snmBinary = snmBinary.substring(24);
             String iDsFromSNM = calcSize(snmBinary);
-            for (int i = Integer.parseInt(iDsFromSNM)*2; i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
+            for (int i = Integer.parseInt(iDsFromSNM); i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
                 this.bcs.add(new IPAddress(iD.getFirst(), iD.getSecond(), iD.getThird(), i - 1));
             }
         } else if (snmBinary.lastIndexOf("1") >= 16 && snmBinary.lastIndexOf("1") < 23) {
             snmBinary = snmBinary.substring(16, 24);
             String iDsFromSNM = calcSize(snmBinary);
-            for (int i = Integer.parseInt(iDsFromSNM)*2; i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
+            for (int i = Integer.parseInt(iDsFromSNM); i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
                 this.bcs.add(new IPAddress(iD.getFirst(), iD.getSecond(), i-1 , invertedSnm.getFourth()));
             }
         } else if (snmBinary.lastIndexOf("1") >= 8 && snmBinary.lastIndexOf("1") < 15) {
             snmBinary = snmBinary.substring(8, 16);
             String iDsFromSNM = calcSize(snmBinary);
-            for (int i = Integer.parseInt(iDsFromSNM)*2; i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
+            for (int i = Integer.parseInt(iDsFromSNM); i <= 256; i = i + Integer.parseInt(iDsFromSNM)) {
                 this.bcs.add(new IPAddress(iD.getFirst(), i-1, invertedSnm.getThird() , invertedSnm.getFourth()));
             }
         }
