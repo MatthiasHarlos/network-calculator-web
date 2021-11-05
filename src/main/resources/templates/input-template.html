@@ -5,14 +5,13 @@
     <title>Netzwerkrechner</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
     <style>
-
     body {
     background: dimGrey;
     text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
        }
     div.second-background {
     transform: translateY(+50%);
-            width: 700px;
+            width: auto;
             height: 500px;
             background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
             background-repeat: no-repeat;
@@ -37,7 +36,6 @@
     z-index: 0;
     border-radius: 10px;
 }
-
 .glow-on-hover:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
@@ -54,19 +52,15 @@
     transition: opacity .3s ease-in-out;
     border-radius: 10px;
 }
-
 .glow-on-hover:active {
     color: #000
 }
-
 .glow-on-hover:active:after {
     background: transparent;
 }
-
 .glow-on-hover:hover:before {
     opacity: 1;
 }
-
 .glow-on-hover:after {
     z-index: -1;
     content: '';
@@ -78,13 +72,11 @@
     top: 0;
     border-radius: 10px;
 }
-
 @keyframes glowing {
     0% { background-position: 0 0; }
     50% { background-position: 400% 0; }
     100% { background-position: 0 0; }
 }
-
 p.fielderror-container {
     margin-top: 5px;
     margin-bottom: 15px;
@@ -100,27 +92,25 @@ p.fielderror-detail {
 </head>
 <body>
 <div class="second-background">
-
     <h1>Geben Sie eine IP und Subnetzmaske ein!</h1>
-
     <form method="post" action="calculate" th:object="${networkInputForm}">
         <div>
             <label for="ipString">IP-Addresse</label>
             <input  type="text" th:field="*{ipString}" placeholder="z.B: 192.168.1.1" maxlength="15"/>
             <span>
                 <label for="shortsnm">/</label>
-            <input style="width: 20px" type="text" name="shortsnm" id="shortsnm" placeholder="24" maxlength="2"/>
+            <input  style="width: 20px" type="text" name="shortsnm" id="shortsnm"  onclick="onlyReadableSNMInput()" placeholder="24" maxlength="2"/>
                 <p class="fielderror-container" th:if="${#fields.hasErrors('ipString')}">
                 <span class="fielderror-detail" th:each="err : ${#fields.errors('ipString')}" th:text="${err}"></span>
             </p>
-            <span class="fielderror-container" th:if="${#fields.hasErrors('shortsnm')}">
+            <p class="fielderror-container" th:if="${#fields.hasErrors('shortsnm')}">
                 <span class="fielderror-detail" th:each="err : ${#fields.errors('shortsnm')}" th:text="${err}"></span>
-            </span>
+            </p>
             </span>
         </div>
         <div>
             <label for="snmString">Subnetzmaske</label>
-            <input type="text" name="snmString" id="snmString" placeholder="z.B: 255.255.255.0" maxlength="15"/>
+            <input  type="text" name="snmString" id="snmString" onclick="onlyReadableShortSNMInput()" placeholder="z.B: 255.255.255.0" maxlength="15"/>
             <p class="fielderror-container" th:if="${#fields.hasErrors('snmString')}">
                 <span class="fielderror-detail" th:each="err : ${#fields.errors('snmString')}" th:text="${err}"></span>
             </p>
@@ -132,6 +122,22 @@ p.fielderror-detail {
         </div>
         </div>
     </form>
+    <script>
+            function onlyReadableSNMInput() {
+            document.getElementById("snmString").style.background = "red";
+            document.getElementById("snmString").style.color = "red";
+            document.getElementById("shortsnm").style.background = "";
+            document.getElementById("shortsnm").style.color = "";
+            document.getElementById("snmString").value = "";
+            }
+            function onlyReadableShortSNMInput() {
+            document.getElementById("shortsnm").style.background = "red";
+            document.getElementById("shortsnm").style.color = "red";
+            document.getElementById("snmString").style.background = "";
+            document.getElementById("snmString").style.color = "";
+            document.getElementById("shortsnm").value = "";
+            }
+        </script>
 </div>
 </body>
 </html>
