@@ -5,9 +5,22 @@
     <title>Netzwerkrechner</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=5.0, minimum-scale=0.86">
     <style>
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+label {
+text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
+}
+h1 {
+text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
+}
     body {
     background: dimGrey;
-    text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;color: rgba(46, 250, 5, 0.5);
        }
     div.second-background {
     transform: translateY(+50%);
@@ -23,7 +36,6 @@
             margin: 0 auto;
             text-align: center;
         }
-
         .glow-on-hover {
     width: 110px;
     height: 25px;
@@ -80,13 +92,17 @@
 p.fielderror-container {
     margin-top: 5px;
     margin-bottom: 15px;
-
 }
-p.fielderror-detail {
+span.fielderror-detail {
     margin-top: 0;
     color: #660000;
-    font-style:italic;
-    font-size: 8pt;
+    font-style:oblique;
+    font-size: 12pt;
+    background-color: yellow;
+}
+span {
+text-shadow: 1px 2px 5px #fb0606, 1px 3px 8px #ff8c8c;
+color: #7c0101;
 }
     </style>
 </head>
@@ -99,7 +115,7 @@ p.fielderror-detail {
             <input  type="text" th:field="*{ipString}" onclick="deleteErrorForIP()" placeholder="z.B: 192.168.1.1" maxlength="15"/>
             <span>
                 <label for="shortsnm">/</label>
-            <input  style="width: 20px" type="text" name="shortsnm" id="shortsnm"  onclick="onlyReadableSNMInput()" placeholder="24" maxlength="2"/>
+            <input  style="width: 20px" type="number" name="shortsnm" id="shortsnm" step="1" min="1" max="32"  onclick="onlyReadableSNMInput()" placeholder="24"/>
                 <p class="fielderror-container" th:if="${#fields.hasErrors('ipString')}">
                 <span class="fielderror-detail" id="errorIP" th:each="err : ${#fields.errors('ipString')}" th:text="${err}"></span>
             </p>

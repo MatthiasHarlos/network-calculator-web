@@ -12,6 +12,9 @@ public class Subnetmask extends IPAddress {
         if (this.getFirst() != 255) {
             throw new IllegalArgumentException();
         }
+        if (this.getFourth() >253) {
+            throw new IllegalStateException();
+        }
         String binary = this.toBinaryString();
         if (!(binary.startsWith("1") && binary.endsWith("0") && !binary.contains("01"))) {
             throw new IllegalArgumentException("invalid subnetmask: " + binary);

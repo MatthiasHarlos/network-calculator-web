@@ -94,15 +94,16 @@ public class NetworkController {
             try {
                 new IPAddress(networkInputForm.getIpString());
             } catch (IllegalArgumentException e) {
-                bindingResult.rejectValue("ipString", "invalid.ipString", "No Valid IP Format");
+                bindingResult.rejectValue("ipString", "invalid.ipString", "Ungültiges Format!");
             }
         }
-
         if (!bindingResult.hasFieldErrors("shortsnm")) {
             try {
                 new Subnetmask(networkInputForm.getSnmString());
             } catch (IllegalArgumentException e) {
                 bindingResult.rejectValue("shortsnm", "invalid.shortsnm", "Kürzel ungültig!");
+            } catch (IllegalStateException e) {
+                bindingResult.rejectValue("snmString", "invalid.snmString", "Sie bauen kein kommunikatives Netz auf!");
             }
         }
         if (!bindingResult.hasFieldErrors("snmString")) {
@@ -110,6 +111,8 @@ public class NetworkController {
                 new Subnetmask(networkInputForm.getSnmString());
             } catch (IllegalArgumentException e) {
                 bindingResult.rejectValue("snmString", "invalid.snmString", "Ungültig!");
+            } catch (IllegalStateException e) {
+                bindingResult.rejectValue("snmString", "invalid.snmString", "Sie bauen kein kommunikatives Netz auf!");
             }
         }
     }
