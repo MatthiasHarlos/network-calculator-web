@@ -22,6 +22,10 @@ public class Subnetmask extends IPAddress {
         setHosts(binary);
     }
 
+    public int getCidr(){
+        return StringUtils.countMatches(this.toBinaryString(), "1");
+    }
+
     public void setHosts(String binary) {
         this.hosts = (int) (Math.pow(2, StringUtils.countMatches(binary, "0"))-2);
     }

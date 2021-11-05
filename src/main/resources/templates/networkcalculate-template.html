@@ -96,7 +96,7 @@
     <tbody>
     <tr>
         <td> Eingabe = </td>
-        <td th:text="${iPAddress}"></td>
+        <td><span th:text="${iPAddress}"></span><span style="color: red" th:text="'  /' + ${snm.getCidr()} + '(cidr)'"></span></td>
         <td th:text="${snm}"></td>
     </tr>
     <tr>
@@ -108,14 +108,14 @@
     <thead>
     <tr>
         <th> </th>
-        <th>Netz-ID</th>
+        <th style="color: blue">Netz-ID</th>
         <th>Broadcast</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td> Result = </td>
-        <td th:text="${netid}"></td>
+        <td style="color: blue" th:text="${netid}"></td>
         <td th:text="${broadcast}"></td>
     </tr>
     </tbody>

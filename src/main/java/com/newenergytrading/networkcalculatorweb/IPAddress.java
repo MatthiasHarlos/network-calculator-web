@@ -23,7 +23,6 @@ public class IPAddress {
         if (parts.size() != 4) {
             throw new IllegalArgumentException();
         }
-
         List<Integer> componentsInt = new ArrayList<>();
 
         for (String part : parts) {
