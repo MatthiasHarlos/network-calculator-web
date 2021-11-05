@@ -15,8 +15,8 @@ import java.util.Objects;
 public class NetworkController {
 
     @GetMapping("/")
-    public void handleRequest() {
-        throw new RuntimeException("test exception");
+    public String index() {
+        return "redirect:/formular";
     }
 
     @GetMapping("formular")
