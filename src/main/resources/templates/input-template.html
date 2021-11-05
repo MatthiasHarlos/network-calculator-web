@@ -96,23 +96,23 @@ p.fielderror-detail {
     <form method="post" action="calculate" th:object="${networkInputForm}">
         <div>
             <label for="ipString">IP-Addresse</label>
-            <input  type="text" th:field="*{ipString}" placeholder="z.B: 192.168.1.1" maxlength="15"/>
+            <input  type="text" th:field="*{ipString}" onclick="deleteErrorForIP()" placeholder="z.B: 192.168.1.1" maxlength="15"/>
             <span>
                 <label for="shortsnm">/</label>
             <input  style="width: 20px" type="text" name="shortsnm" id="shortsnm"  onclick="onlyReadableSNMInput()" placeholder="24" maxlength="2"/>
                 <p class="fielderror-container" th:if="${#fields.hasErrors('ipString')}">
-                <span class="fielderror-detail" th:each="err : ${#fields.errors('ipString')}" th:text="${err}"></span>
+                <span class="fielderror-detail" id="errorIP" th:each="err : ${#fields.errors('ipString')}" th:text="${err}"></span>
             </p>
             <p class="fielderror-container" th:if="${#fields.hasErrors('shortsnm')}">
-                <span class="fielderror-detail" th:each="err : ${#fields.errors('shortsnm')}" th:text="${err}"></span>
+                <span class="fielderror-detail" id="errorTwo" th:each="err : ${#fields.errors('shortsnm')}" th:text="${err}"></span>
             </p>
             </span>
         </div>
         <div>
             <label for="snmString">Subnetzmaske</label>
             <input  type="text" name="snmString" id="snmString" onclick="onlyReadableShortSNMInput()" placeholder="z.B: 255.255.255.0" maxlength="15"/>
-            <p class="fielderror-container" th:if="${#fields.hasErrors('snmString')}">
-                <span class="fielderror-detail" th:each="err : ${#fields.errors('snmString')}" th:text="${err}"></span>
+            <p  class="fielderror-container" th:if="${#fields.hasErrors('snmString')}">
+                <span  class="fielderror-detail"  id="errorOne" th:each="err : ${#fields.errors('snmString')}" th:text="${err}"></span>
             </p>
         </div>
         <div>
@@ -123,12 +123,19 @@ p.fielderror-detail {
         </div>
     </form>
     <script>
+
+            function deleteErrorForIP() {
+            document.getElementById("errorIP").innerHTML = "";
+            }
+
             function onlyReadableSNMInput() {
             document.getElementById("snmString").style.background = "red";
             document.getElementById("snmString").style.color = "red";
             document.getElementById("shortsnm").style.background = "";
             document.getElementById("shortsnm").style.color = "";
             document.getElementById("snmString").value = "";
+            document.getElementById("errorOne").innerHTML = "";
+            document.getElementById("errorTwo").innerHTML = "";
             }
             function onlyReadableShortSNMInput() {
             document.getElementById("shortsnm").style.background = "red";
@@ -136,6 +143,8 @@ p.fielderror-detail {
             document.getElementById("snmString").style.background = "";
             document.getElementById("snmString").style.color = "";
             document.getElementById("shortsnm").value = "";
+            document.getElementById("errorOne").innerHTML = "";
+            document.getElementById("errorTwo").innerHTML = "";
             }
         </script>
 </div>
