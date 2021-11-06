@@ -104,6 +104,51 @@ span {
 text-shadow: 1px 2px 5px #fb0606, 1px 3px 8px #ff8c8c;
 color: #7c0101;
 }
+
+.container {
+position: relative;
+max-width: 600px;
+width: 1px;
+height: 1px;
+color: transparent;
+border: 2px solid #ffffff;
+margin: 40px auto;
+padding: 30px;
+box-sizing: border-box;
+}
+
+.container:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: -25px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.picture {
+width: auto;
+height: 250px;
+background: url(https://www.itwissen.info/lex-images/ip-adressklassen.png);
+background-size:500px;
+background-position: center;
+background-repeat: no-repeat;
+}
+.pictureTwo {
+width: auto;
+height: 150px;
+background: url(https://www.itwissen.info/lex-images/broadcast-prinzip-einer-an-alle.png);
+background-size:300px;
+background-position: center;
+background-repeat: no-repeat;
+}
     </style>
 </head>
 <body>
@@ -138,7 +183,151 @@ color: #7c0101;
         </div>
         </div>
     </form>
+
+    <h1 style="transform: translateY(50%)"> Hilfreiche Informationen!</h1>
+    <button style="transform: translateY(30%)" onclick="subnetmask()">Subnetzmaske|CIDR</button>
+    <button style="transform: translateY(30%)" onclick="hosts()">Hosts</button>
+    <button style="transform: translateY(30%)" onclick="ipButton()">IP!</button>
+    <button style="transform: translateY(30%)" onclick="broadcastButton()">Broadcast!</button>
+    <button style="transform: translateY(30%)" onclick="idButton()">ID!</button>
+    <div id="container" class="container">
+        <h4 id="containerhead"></h4>
+        <p id="one"></p>
+
+        <p id="two"></p>
+
+        <div id="picture" hidden class="picture"></div>
+        <div id="pictureTwo" hidden class="pictureTwo"></div>
+
+        <p id="three"></p>
+
+        <h4 id="four"></h4>
+        <p id="five"></p>
+
+        <h4 id="six"></h4>
+        <p id="seven"></p>
+        <p id="eight"></p>
+        <p id="nine"></p>
+        <p id="ten"></p>
+        <p id="eleven"></p>
+        <p id="twelve"></p>
+        <button id="closingButton" role="button" hidden onclick="closing()">Schließen!</button>
+    </div>
     <script>
+    var changer = new Boolean("true");
+
+            function subnetmask(){
+            if (changer) {
+            opening();
+            document.getElementById("containerhead").innerHTML = "1 Aufbau einer Subnetzmaske";
+            document.getElementById("one").innerHTML = "Eine Subnetzmaske besteht immer aus einem Netzanteil und einem Hostanteil. Die Anzahl an „1er“-Bits (von links) gibt Netzanteil an. Der Rest ist der Hostanteil. Nachfolgend ist der Netzanteil unserer Beispiel Subnetzmaske rot und der Hostanteil grün gekennzeichnet.";
+            document.getElementById("two").innerHTML = "11111111 11111111 11111111 00000000";
+            document.getElementById("three").innerHTML = "In Kombination mit der IP-Adresse kann man anhand einer Subnetzmaske erkennen, ob 2 Computer in einem (Sub-)Netzwerk sind und miteinander direkt kommunizieren können oder diese in verschiedenen Netzwerken liegen und ein Router vermitteln muss.";
+            document.getElementById("four").innerHTML = "2 Schreibweise Subnetzmaske und IP-Adresse";
+            document.getElementById("five").innerHTML = "In Fachbüchern und auf Internetseiten findet man häufig die Schreibweise 192.168.0.2/24. Dabei kennzeichnet das „/24“ die Subnetzmaske und wird CIDR genannt. Genauer gesagt den Anteil der Bits, die auf 1 stehen und damit auch den Netzanteil: „/24“ steht für 255.255.255.0.";
+            document.getElementById("six").innerHTML = "3 Oft genutzte Subnetzmasken";
+            document.getElementById("seven").innerHTML = "Netzmaske	Bitschreibweise";
+            document.getElementById("eight").innerHTML = "255.0.0.0 (/8)	11111111 00000000 00000000 00000000";
+            document.getElementById("nine").innerHTML = "255.255.0.0 (/16)	11111111 11111111 00000000 00000000";
+            document.getElementById("ten").innerHTML = "255.255.240.0 (/20)	11111111 11111111 11110000 00000000";
+            document.getElementById("eleven").innerHTML = "255.255.255.0 (/24)	11111111 11111111 11111111 00000000";
+            document.getElementById("twelve").innerHTML = "255.255.255.240 (/28)	11111111 11111111 11111111 11110000";
+            }
+            else {
+            resetContainer();
+            }
+            changer = !changer;
+            }
+
+            function broadcastButton() {
+            if (changer) {
+            opening();
+            document.getElementById("containerhead").innerHTML = "Broadcasting";
+            document.getElementById("one").innerHTML = "Eine Broadcast-Übertragung entspricht einem Rundruf oder dem Rundsenden, es ist die gleichzeitige Übertragung von einem Punkt aus zu allen Teilnehmern. Klassische Broadcast-Anwendungen sind Rundfunk und Fernsehen.";
+            document.getElementById("two").innerHTML = "Bei Broadcast werden die Informationen vom Sender zu den Empfängern und nicht in gegengesetzter Richtung übertragen. Außerdem kann der Empfänger nur aus den Informationen auswählen, die ihm angeboten werden. Zwischen Sender und Empfänger besteht keine Interaktivität. Eine solche ist nur über spezielle Rückkanäle möglich, wie beispielsweise bei DVB, das verschiedene Return Channels unterstützt.";
+            document.getElementById("three").innerHTML = "In lokalen Netzen ist ein Broadcast eine Nachricht, die an alle Geräte in allen Netzen verschickt wird. Sie wird von jedem Router an alle angeschlossenen Netzwerke weitergeleitet. Sollen alle Endgeräte eines bestimmten Netzes angesprochen werden, spricht man von Multicast oder Netzwerk-Broadcast, im Falle von IP-Netzen von IP-Multicast. IP-Broadcasts können durch die IP-Adressen direkt ausgeführt werden. So ginge beispielsweise die Klasse-A-Adresse 1.0.0.0 an alle Knoten im Netzwerk 1 und die Klasse-C-Adresse 192.7.4.0 an alle Knoten im Netzwerk 192.7.4.";
+            document.getElementById("pictureTwo").removeAttribute("hidden");
+            }
+            else {
+            resetContainer();
+            }
+            changer = !changer;
+            }
+
+            function hosts() {
+            if (changer) {
+            opening();
+            document.getElementById("containerhead").innerHTML = "Anzahl Hosts bei einer Subnetzmaske berechnen";
+            document.getElementById("one").innerHTML = "Bei einer Standard-Subnetzmaske /24 sind 24 Bits gesetzt. Bleiben also bei maximal 32 Bits noch 8 Bits für den Hostanteil. Um die Anzahl der maximal möglichen Hosts bei einer Subnetzmaske /24 zu berechnen geht man folgend vor:";
+            document.getElementById("two").innerHTML = "Wir haben 8 Bit Hostanteil das heißt folgende Berechnung: 2^8=256 || 256 – 2 = 254 Hosts";
+            document.getElementById("three").innerHTML = "Einige werden sich Fragen, warum 2 Hosts abgezogen werden. Dies liegt daran, dass immer die erste (alle Bits im Hostteil sind null) und letzte (alle Bits im Hostteil sind eins) Adresse reserviert sind. Die erste Adresse ist dabei das Netz selbst und die letzte Adresse die Broadcast-Adresse.";
+            }
+            else {
+            resetContainer();
+            }
+            changer = !changer;
+            }
+
+            function idButton(){
+            if (changer) {
+            opening();
+            document.getElementById("containerhead").innerHTML = "Netzwerkkennung";
+            document.getElementById("one").innerHTML = "Die Bezeichnung Netzwerk-ID (net-id) wird allgemein für die Authentifizierung von Netzwerkgeräten, Servern und Portalen benutzt; ebenso für Inhalten, Anwendungen, Benutzerdaten und Kontaktinformationen.";
+            document.getElementById("two").innerHTML = "Darüber hinaus kennt das IP-Protokoll die Bezeichnung Netzwerkkennung, Network Identification (netid). Dabei handelt es sich um die klassische Einteilung von IP-Adressen. Klassische IP-Adressen waren in Adressklassen eingeteilt und setzten sich zusammen aus der Netzwerkkennung, Network Identification (netid), und der Hostkennung, Host Identification (host-id). Es gab drei Adressklassen mit einer festen Zuordnung zwischen Netzwerkadressen und Hostadressen.";
+            document.getElementById("three").innerHTML = "Das waren die Adressklassen A, B und C mit 128 (7 Bit), 16.384 (14 Bit) und 2.097.152 (21 Bit) Netzwerkadressen. Dieses unflexible Adressklassenschema wurde mit dem Classless Interdomain Routing (CIDR) bei den IPv4-Adressen aufgehoben bietet Freiräume für bis zu 4.294.967.296 (32 Bit) Netzwerkkennungen. Gleiches gilt für IPv6-Adressen, die ebenfalls nach CIDR aufgebaut sind und sogar einen Adressumfang von 128 Bit repräsentieren.";
+            document.getElementById("picture").removeAttribute("hidden");
+            }
+            else {
+            resetContainer();
+            }
+            changer = !changer;
+            }
+
+            function ipButton(){
+            if (changer) {
+            opening();
+            document.getElementById("containerhead").innerHTML = "IP-Adresse";
+            document.getElementById("one").innerHTML = "Eine IP-Adresse ist eine Adresse in Computernetzen, die – wie das Internet – auf dem Internetprotokoll (IP) basiert. Sie wird Geräten zugewiesen, die an das Netz angebunden sind, und macht die Geräte so adressierbar und damit erreichbar. Die IP-Adresse kann einen einzelnen Empfänger oder eine Gruppe von Empfängern bezeichnen (Multicast, Broadcast). Umgekehrt können einem Computer mehrere IP-Adressen zugeordnet sein. Die IP-Adresse wird vor allem verwendet, um Daten von ihrem Absender zum vorgesehenen Empfänger zu transportieren. Ähnlich der Postanschrift auf einem Briefumschlag werden Datenpakete mit einer IP-Adresse versehen, die den Empfänger eindeutig identifiziert. Aufgrund dieser Adresse können die „Poststellen“, die Router, entscheiden, in welche Richtung das Paket weitertransportiert werden soll. Im Gegensatz zu Postadressen sind IP-Adressen nicht an einen bestimmten Ort gebunden. Die bekannteste Notation der heute geläufigen IPv4-Adressen besteht aus vier Zahlen, die Werte von 0 bis 255 annehmen können und mit einem Punkt getrennt werden, beispielsweise 192.0.2.42.";
+            }
+            else {
+            resetContainer();
+            }
+            changer = !changer;
+            }
+
+            function closing() {
+            resetContainer();
+            changer = !changer;
+            }
+
+            function opening() {
+            document.getElementById("container").style.width = "600px";
+            document.getElementById("container").style.height = "auto";
+            document.getElementById("container").style.color = "black";
+            document.getElementById("closingButton").removeAttribute("hidden");
+            }
+
+            function resetContainer() {
+            document.getElementById("container").style.width = "1px";
+            document.getElementById("container").style.height = "1px";
+            document.getElementById("container").style.color = "transparent";
+            document.getElementById("containerhead").innerHTML = "";
+            document.getElementById("one").innerHTML = "";
+            document.getElementById("two").innerHTML = "";
+            document.getElementById("three").innerHTML = "";
+            document.getElementById("four").innerHTML = "";
+            document.getElementById("five").innerHTML = "";
+            document.getElementById("six").innerHTML = "";
+            document.getElementById("seven").innerHTML = "";
+            document.getElementById("eight").innerHTML = "";
+            document.getElementById("nine").innerHTML = "";
+            document.getElementById("ten").innerHTML = "";
+            document.getElementById("eleven").innerHTML = "";
+            document.getElementById("twelve").innerHTML = "";
+            document.getElementById("closingButton").setAttribute("hidden", "hidden");
+            document.getElementById("picture").setAttribute("hidden", "hidden");
+            document.getElementById("pictureTwo").setAttribute("hidden", "hidden");
+            }
 
             function deleteErrorForIP() {
             document.getElementById("errorIP").innerHTML = "";
@@ -153,6 +342,7 @@ color: #7c0101;
             document.getElementById("errorOne").innerHTML = "";
             document.getElementById("errorTwo").innerHTML = "";
             }
+
             function onlyReadableShortSNMInput() {
             document.getElementById("shortsnm").style.background = "red";
             document.getElementById("shortsnm").style.color = "red";
