@@ -26,7 +26,7 @@ text-shadow: rgba(46, 250, 5, 0.5) 1px 1px 0px, rgba(0, 0, 0, 1) 2px 2px 0px;col
     transform: translateY(+15%);
             width: auto;
             height: 500px;
-            background: url(https://images-na.ssl-images-amazon.com/images/I/61EpAj0HihL.png);
+            background: url(/src/main/resources/rechner.png);
             background-repeat: no-repeat;
             background-size: 250px;
             background-position: top;
@@ -126,12 +126,16 @@ border-right: 2px solid #ffffff;
 border-bottom: 2px solid #ffffff;
 border-left: 0px solid #ffffff;
 top: 0%;
-left: 10%;
-margin-left: -25px;
-content: "";
+left: 5%;
+margin-left: 0px;
 transform: rotate(45deg);
-margin-top: -25px;
+margin-top: 0px;
 background: #008E15;
+content: "";
+background-image: url(/src/main/resources/faq.png);
+background-size:40px;
+background-position: center;
+background-repeat: no-repeat;
 }
 .container2:after{
 position: absolute;
@@ -216,7 +220,7 @@ background: #008E15;
 .picture {
 width: auto;
 height: 300px;
-background: url(https://www.itwissen.info/lex-images/ip-adressklassen.png);
+background: url(/src/main/resources/ip-adressklassen.png);
 background-size: 400px;
 background-position: center;
 background-repeat: no-repeat;
@@ -224,7 +228,7 @@ background-repeat: no-repeat;
 .pictureTwo {
 width: auto;
 height: 150px;
-background: url(https://www.itwissen.info/lex-images/broadcast-prinzip-einer-an-alle.png);
+background: url(/src/main/resources/broadcast.png);
 background-size:300px;
 background-position: center;
 background-repeat: no-repeat;
@@ -319,6 +323,59 @@ background-repeat: no-repeat;
 .icon-send:before {
 	content: "\f1d8";
 }
+
+.button {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  color: transparent;
+  cursor: pointer;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  outline: none;
+  overflow: hidden;
+  padding: 10px 0 0;
+  position: absolute;
+  text-transform: uppercase;
+  left: 50%;
+  transition: all 0.2s ease-in;
+  width: 100px;
+}
+
+.button::before,
+.button::after {
+  background-color: white;
+  content: '';
+  display: block;
+  height: 1px;
+  left: 0;
+  position: absolute;
+  transform-origin: left center;
+  transition: all 0.2s ease-in;
+  width: 141.4214px;
+  z-index: -1;
+}
+
+.button::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.button::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+.button:hover {
+  color: #8A2387;
+}
+
+.button:hover::before,
+.button:hover::after {
+  height: 50px;
+  transform: rotate(0deg);
+}
     </style>
 </head>
 <body>
@@ -383,14 +440,22 @@ background-repeat: no-repeat;
         <p id="ten"></p>
         <p id="eleven"></p>
         <p id="twelve"></p>
-        <button id="closingButton" role="button" hidden onclick="closing()">Schließen!</button>
+        <button class="button" id="closingButton" role="button" hidden onclick="closing()">Schließen!</button>
     </div>
     <script>
     var changer = new Boolean("true");
-
+    var open = new Boolean("false");
+    var subOpen = new Boolean("false");
+    var openBC = new Boolean("false");
+    var openID = new Boolean("false");
+    var openHosts = new Boolean("false");
+    var openIP = new Boolean("false");
             function subnetmask(){
-            if (changer) {
+            if (open != subOpen || openBC || openID || openIP || openHosts || changer) {
+            resetContainer();
             opening();
+            changer = false;
+            subOpen = true;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container2");
             document.getElementById("containerhead").innerHTML = "1 Aufbau einer Subnetzmaske";
@@ -409,13 +474,16 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            }
             changer = !changer;
+            }
             }
 
             function broadcastButton() {
-            if (changer) {
+            if (open != openBC || subOpen || openID || openIP || openHosts || changer) {
+            resetContainer();
             opening();
+            openBC = true;
+            changer  = false;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container5");
             document.getElementById("containerhead").innerHTML = "Broadcasting";
@@ -424,15 +492,18 @@ background-repeat: no-repeat;
             document.getElementById("three").innerHTML = "In lokalen Netzen ist ein Broadcast eine Nachricht, die an alle Geräte in allen Netzen verschickt wird. Sie wird von jedem Router an alle angeschlossenen Netzwerke weitergeleitet. Sollen alle Endgeräte eines bestimmten Netzes angesprochen werden, spricht man von Multicast oder Netzwerk-Broadcast, im Falle von IP-Netzen von IP-Multicast. IP-Broadcasts können durch die IP-Adressen direkt ausgeführt werden. So ginge beispielsweise die Klasse-A-Adresse 1.0.0.0 an alle Knoten im Netzwerk 1 und die Klasse-C-Adresse 192.7.4.0 an alle Knoten im Netzwerk 192.7.4.";
             document.getElementById("pictureTwo").removeAttribute("hidden");
             }
-            else {
+            else if (open == openBC) {
             resetContainer();
-            }
             changer = !changer;
+            }
             }
 
             function hosts() {
-            if (changer) {
+            if (open != openHosts || openBC || openID || openIP || subOpen || changer) {
+            resetContainer();
             opening();
+            openHosts = true;
+            changer  = false;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container3");
             document.getElementById("containerhead").innerHTML = "Anzahl Hosts bei einer Subnetzmaske berechnen";
@@ -442,13 +513,16 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            }
             changer = !changer;
+            }
             }
 
             function idButton(){
-            if (changer) {
+            if (open != openID || openBC || openHosts || openIP || subOpen || changer) {
+            resetContainer();
             opening();
+            openID = true;
+            changer  = false;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container6");
             document.getElementById("containerhead").innerHTML = "Netzwerkkennung";
@@ -459,13 +533,16 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            }
             changer = !changer;
+            }
             }
 
             function ipButton(){
-            if (changer) {
+            if (open != openIP || openBC || openHosts || openID || subOpen || changer) {
+            resetContainer();
             opening();
+            openIP = true;
+            changer  = false;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container4");
             document.getElementById("containerhead").innerHTML = "IP-Adresse";
@@ -473,8 +550,8 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            }
             changer = !changer;
+            }
             }
 
             function closing() {
@@ -487,9 +564,16 @@ background-repeat: no-repeat;
             document.getElementById("container").style.height = "auto";
             document.getElementById("container").style.color = "black";
             document.getElementById("closingButton").removeAttribute("hidden");
+            open = true;
             }
 
             function resetContainer() {
+            subOpen = false;
+            open = false;
+            openBC = false;
+            openID = false;
+            openIP = false;
+            openHosts = false;
             document.getElementById("container").classList.remove("container2");
             document.getElementById("container").classList.remove("container3");
             document.getElementById("container").classList.remove("container4");
