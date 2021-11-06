@@ -117,7 +117,7 @@ padding: 30px;
 box-sizing: border-box;
 }
 
-.container:after{
+.container1:after{
 position: absolute;
 width: 50px;
 height: 50px;
@@ -128,6 +128,86 @@ border-left: 0px solid #ffffff;
 top: 0%;
 left: 10%;
 margin-left: -25px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.container2:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: 25px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.container3:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: 180px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.container4:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: 230px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.container5:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: 300px;
+content: "";
+transform: rotate(45deg);
+margin-top: -25px;
+background: #008E15;
+}
+.container6:after{
+position: absolute;
+width: 50px;
+height: 50px;
+border-top: 0px solid #ffffff;
+border-right: 2px solid #ffffff;
+border-bottom: 2px solid #ffffff;
+border-left: 0px solid #ffffff;
+top: 0%;
+left: 10%;
+margin-left: 380px;
 content: "";
 transform: rotate(45deg);
 margin-top: -25px;
@@ -282,7 +362,7 @@ background-repeat: no-repeat;
     <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="ipButton()">IP!</button>
     <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="broadcastButton()">Broadcast!</button>
     <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="idButton()">ID!</button>
-    <div id="container" class="container">
+    <div id="container" class="container container1">
         <h4 id="containerhead"></h4>
         <p id="one"></p>
 
@@ -311,6 +391,8 @@ background-repeat: no-repeat;
             function subnetmask(){
             if (changer) {
             opening();
+            document.getElementById("container").classList.remove("container1");
+            document.getElementById("container").classList.add("container2");
             document.getElementById("containerhead").innerHTML = "1 Aufbau einer Subnetzmaske";
             document.getElementById("one").innerHTML = "Eine Subnetzmaske besteht immer aus einem Netzanteil und einem Hostanteil. Die Anzahl an „1er“-Bits (von links) gibt Netzanteil an. Der Rest ist der Hostanteil. Nachfolgend ist der Netzanteil unserer Beispiel Subnetzmaske rot und der Hostanteil grün gekennzeichnet.";
             document.getElementById("two").innerHTML = "11111111 11111111 11111111 00000000";
@@ -334,6 +416,8 @@ background-repeat: no-repeat;
             function broadcastButton() {
             if (changer) {
             opening();
+            document.getElementById("container").classList.remove("container1");
+            document.getElementById("container").classList.add("container5");
             document.getElementById("containerhead").innerHTML = "Broadcasting";
             document.getElementById("one").innerHTML = "Eine Broadcast-Übertragung entspricht einem Rundruf oder dem Rundsenden, es ist die gleichzeitige Übertragung von einem Punkt aus zu allen Teilnehmern. Klassische Broadcast-Anwendungen sind Rundfunk und Fernsehen.";
             document.getElementById("two").innerHTML = "Bei Broadcast werden die Informationen vom Sender zu den Empfängern und nicht in gegengesetzter Richtung übertragen. Außerdem kann der Empfänger nur aus den Informationen auswählen, die ihm angeboten werden. Zwischen Sender und Empfänger besteht keine Interaktivität. Eine solche ist nur über spezielle Rückkanäle möglich, wie beispielsweise bei DVB, das verschiedene Return Channels unterstützt.";
@@ -349,6 +433,8 @@ background-repeat: no-repeat;
             function hosts() {
             if (changer) {
             opening();
+            document.getElementById("container").classList.remove("container1");
+            document.getElementById("container").classList.add("container3");
             document.getElementById("containerhead").innerHTML = "Anzahl Hosts bei einer Subnetzmaske berechnen";
             document.getElementById("one").innerHTML = "Bei einer Standard-Subnetzmaske /24 sind 24 Bits gesetzt. Bleiben also bei maximal 32 Bits noch 8 Bits für den Hostanteil. Um die Anzahl der maximal möglichen Hosts bei einer Subnetzmaske /24 zu berechnen geht man folgend vor:";
             document.getElementById("two").innerHTML = "Wir haben 8 Bit Hostanteil das heißt folgende Berechnung: 2^8=256 || 256 – 2 = 254 Hosts";
@@ -363,6 +449,8 @@ background-repeat: no-repeat;
             function idButton(){
             if (changer) {
             opening();
+            document.getElementById("container").classList.remove("container1");
+            document.getElementById("container").classList.add("container6");
             document.getElementById("containerhead").innerHTML = "Netzwerkkennung";
             document.getElementById("one").innerHTML = "Die Bezeichnung Netzwerk-ID (net-id) wird allgemein für die Authentifizierung von Netzwerkgeräten, Servern und Portalen benutzt; ebenso für Inhalten, Anwendungen, Benutzerdaten und Kontaktinformationen.";
             document.getElementById("two").innerHTML = "Darüber hinaus kennt das IP-Protokoll die Bezeichnung Netzwerkkennung, Network Identification (netid). Dabei handelt es sich um die klassische Einteilung von IP-Adressen. Klassische IP-Adressen waren in Adressklassen eingeteilt und setzten sich zusammen aus der Netzwerkkennung, Network Identification (netid), und der Hostkennung, Host Identification (host-id). Es gab drei Adressklassen mit einer festen Zuordnung zwischen Netzwerkadressen und Hostadressen.";
@@ -378,6 +466,8 @@ background-repeat: no-repeat;
             function ipButton(){
             if (changer) {
             opening();
+            document.getElementById("container").classList.remove("container1");
+            document.getElementById("container").classList.add("container4");
             document.getElementById("containerhead").innerHTML = "IP-Adresse";
             document.getElementById("one").innerHTML = "Eine IP-Adresse ist eine Adresse in Computernetzen, die – wie das Internet – auf dem Internetprotokoll (IP) basiert. Sie wird Geräten zugewiesen, die an das Netz angebunden sind, und macht die Geräte so adressierbar und damit erreichbar. Die IP-Adresse kann einen einzelnen Empfänger oder eine Gruppe von Empfängern bezeichnen (Multicast, Broadcast). Umgekehrt können einem Computer mehrere IP-Adressen zugeordnet sein. Die IP-Adresse wird vor allem verwendet, um Daten von ihrem Absender zum vorgesehenen Empfänger zu transportieren. Ähnlich der Postanschrift auf einem Briefumschlag werden Datenpakete mit einer IP-Adresse versehen, die den Empfänger eindeutig identifiziert. Aufgrund dieser Adresse können die „Poststellen“, die Router, entscheiden, in welche Richtung das Paket weitertransportiert werden soll. Im Gegensatz zu Postadressen sind IP-Adressen nicht an einen bestimmten Ort gebunden. Die bekannteste Notation der heute geläufigen IPv4-Adressen besteht aus vier Zahlen, die Werte von 0 bis 255 annehmen können und mit einem Punkt getrennt werden, beispielsweise 192.0.2.42.";
             }
@@ -400,6 +490,12 @@ background-repeat: no-repeat;
             }
 
             function resetContainer() {
+            document.getElementById("container").classList.remove("container2");
+            document.getElementById("container").classList.remove("container3");
+            document.getElementById("container").classList.remove("container4");
+            document.getElementById("container").classList.remove("container5");
+            document.getElementById("container").classList.remove("container6");
+            document.getElementById("container").classList.add("container1");
             document.getElementById("container").style.width = "1px";
             document.getElementById("container").style.height = "1px";
             document.getElementById("container").style.color = "transparent";
