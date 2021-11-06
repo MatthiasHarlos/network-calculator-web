@@ -149,6 +149,96 @@ background-size:300px;
 background-position: center;
 background-repeat: no-repeat;
 }
+
+.btn {
+  border: none;
+  font-family: 'Lato';
+  font-size: 8px;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 20px 80px;
+  display: inline-block;
+  margin: 1px 3px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn:before {
+  font-family: 'FontAwesome';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Icon separator */
+.btn-sep {
+  padding: 12px 10px 12px 30px;
+}
+
+.btn-sep:before {
+  background: rgba(0,0,0,0.15);
+}
+
+.btn-1 {
+  background: #3498db;
+  color: #fff;
+}
+
+.btn-1:hover {
+  background: #2980b9;
+}
+
+.btn-1:active {
+  background: #2980b9;
+  top: 2px;
+}
+
+.btn-1:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+  font-size: 150%;
+  width: 30px;
+}
+.icon-cart:before {
+	content: "\f07a";
+}
+
+.icon-heart:before {
+	content: "\f55a";
+}
+
+.icon-info:before {
+	content: "\f05a";
+}
+
+.icon-send:before {
+	content: "\f1d8";
+}
     </style>
 </head>
 <body>
@@ -185,11 +275,13 @@ background-repeat: no-repeat;
     </form>
 
     <h1 style="transform: translateY(50%)"> Hilfreiche Informationen!</h1>
-    <button style="transform: translateY(30%)" onclick="subnetmask()">Subnetzmaske|CIDR</button>
-    <button style="transform: translateY(30%)" onclick="hosts()">Hosts</button>
-    <button style="transform: translateY(30%)" onclick="ipButton()">IP!</button>
-    <button style="transform: translateY(30%)" onclick="broadcastButton()">Broadcast!</button>
-    <button style="transform: translateY(30%)" onclick="idButton()">ID!</button>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="subnetmask()">Subnetzmaske|CIDR</button>
+    <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="hosts()">Hosts</button>
+    <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="ipButton()">IP!</button>
+    <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="broadcastButton()">Broadcast!</button>
+    <button class="btn btn-1 btn-sep icon-info" style="transform: translateY(30%)" onclick="idButton()">ID!</button>
     <div id="container" class="container">
         <h4 id="containerhead"></h4>
         <p id="one"></p>
