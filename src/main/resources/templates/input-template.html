@@ -443,19 +443,12 @@ background-repeat: no-repeat;
         <button class="button" id="closingButton" role="button" hidden onclick="closing()">Schließen!</button>
     </div>
     <script>
-    var changer = new Boolean("true");
-    var open = new Boolean("false");
-    var subOpen = new Boolean("false");
-    var openBC = new Boolean("false");
-    var openID = new Boolean("false");
-    var openHosts = new Boolean("false");
-    var openIP = new Boolean("false");
+    var changer = 0;
             function subnetmask(){
-            if (open != subOpen || openBC || openID || openIP || openHosts || changer) {
+            if (changer == 0 || changer > 1) {
             resetContainer();
             opening();
-            changer = false;
-            subOpen = true;
+            changer = 1;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container2");
             document.getElementById("containerhead").innerHTML = "1 Aufbau einer Subnetzmaske";
@@ -474,16 +467,14 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            changer = !changer;
             }
             }
 
             function broadcastButton() {
-            if (open != openBC || subOpen || openID || openIP || openHosts || changer) {
+            if (changer < 2 || changer > 2) {
             resetContainer();
             opening();
-            openBC = true;
-            changer  = false;
+            changer  = 2;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container5");
             document.getElementById("containerhead").innerHTML = "Broadcasting";
@@ -492,18 +483,16 @@ background-repeat: no-repeat;
             document.getElementById("three").innerHTML = "In lokalen Netzen ist ein Broadcast eine Nachricht, die an alle Geräte in allen Netzen verschickt wird. Sie wird von jedem Router an alle angeschlossenen Netzwerke weitergeleitet. Sollen alle Endgeräte eines bestimmten Netzes angesprochen werden, spricht man von Multicast oder Netzwerk-Broadcast, im Falle von IP-Netzen von IP-Multicast. IP-Broadcasts können durch die IP-Adressen direkt ausgeführt werden. So ginge beispielsweise die Klasse-A-Adresse 1.0.0.0 an alle Knoten im Netzwerk 1 und die Klasse-C-Adresse 192.7.4.0 an alle Knoten im Netzwerk 192.7.4.";
             document.getElementById("pictureTwo").removeAttribute("hidden");
             }
-            else if (open == openBC) {
+            else {
             resetContainer();
-            changer = !changer;
             }
             }
 
             function hosts() {
-            if (open != openHosts || openBC || openID || openIP || subOpen || changer) {
+            if (changer < 3 || changer > 3) {
             resetContainer();
             opening();
-            openHosts = true;
-            changer  = false;
+            changer  = 3;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container3");
             document.getElementById("containerhead").innerHTML = "Anzahl Hosts bei einer Subnetzmaske berechnen";
@@ -513,16 +502,14 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            changer = !changer;
             }
             }
 
             function idButton(){
-            if (open != openID || openBC || openHosts || openIP || subOpen || changer) {
+            if (changer < 4 || changer > 4) {
             resetContainer();
             opening();
-            openID = true;
-            changer  = false;
+            changer  = 4;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container6");
             document.getElementById("containerhead").innerHTML = "Netzwerkkennung";
@@ -533,16 +520,14 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            changer = !changer;
             }
             }
 
             function ipButton(){
-            if (open != openIP || openBC || openHosts || openID || subOpen || changer) {
+            if (changer < 5) {
             resetContainer();
             opening();
-            openIP = true;
-            changer  = false;
+            changer  = 5;
             document.getElementById("container").classList.remove("container1");
             document.getElementById("container").classList.add("container4");
             document.getElementById("containerhead").innerHTML = "IP-Adresse";
@@ -550,13 +535,11 @@ background-repeat: no-repeat;
             }
             else {
             resetContainer();
-            changer = !changer;
             }
             }
 
             function closing() {
             resetContainer();
-            changer = !changer;
             }
 
             function opening() {
@@ -568,12 +551,7 @@ background-repeat: no-repeat;
             }
 
             function resetContainer() {
-            subOpen = false;
-            open = false;
-            openBC = false;
-            openID = false;
-            openIP = false;
-            openHosts = false;
+            changer = 0;
             document.getElementById("container").classList.remove("container2");
             document.getElementById("container").classList.remove("container3");
             document.getElementById("container").classList.remove("container4");
