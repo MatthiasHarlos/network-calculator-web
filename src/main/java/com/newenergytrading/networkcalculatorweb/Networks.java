@@ -7,22 +7,45 @@ public class Networks {
     private final List<IPAddress> iDs = new ArrayList<>();
     private final List<IPAddress> bcs = new ArrayList<>();
     private final List<List<IPAddress>> ips = new ArrayList<>();
+    private List<List<String>> networksWithTitle = new ArrayList<>();
     private List<List<String>> networks = new ArrayList<>();
     private int host;
 
+    public List<List<String>> getNetworks() {
+        return networks;
+    }
+
+    private void setNetworks(List<List<String>> networks) {
+        this.networks = networks;
+    }
 
     public Networks(IPAddress iD, Subnetmask snm, int hosts) {
         setPossibleIDs(iD, snm);
         setPossibleBCs(iD, snm);
         setPossibleIPs(snm);
         setHost(hosts);
+        calculateAllNetsWithTitle();
         calculateAllNets();
+    }
+
+    private void calculateAllNets() {
+        List<List<String>> resultLists = new ArrayList<>();
+        for (int i = 0; i < iDs.size(); i++) {
+            List<String> result = new ArrayList<>();
+            result.add(iDs.get(i).toString());
+            result.add(bcs.get(i).toString());
+            result.add(ips.get(i).get(0).toString());
+            result.add(ips.get(i).get(1).toString());
+            result.add(Integer.toString(getHost()));
+            resultLists.add(result);
+        }
+        setNetworks(resultLists);
     }
 
     public Networks() {}
 
-    public List<List<String>> getNetworks() {
-        return networks;
+    public List<List<String>> getNetworksWithTitle() {
+        return networksWithTitle;
     }
 
     public void setSimpleFirstAndLastIP(IPAddress iD, IPAddress bc) {
@@ -41,7 +64,7 @@ public class Networks {
         return result;
     }
 
-    private void calculateAllNets() {
+    private void calculateAllNetsWithTitle() {
         List<List<String>> resultLists = new ArrayList<>();
         for (int i = 0; i < iDs.size(); i++) {
             List<String> result = new ArrayList<>();
@@ -52,7 +75,7 @@ public class Networks {
             result.add("Mögliche Hosts= " + getHost());
             resultLists.add(result);
         }
-        setNetworks(resultLists);
+        setNetworksWithTitle(resultLists);
     }
 
     private void setPossibleIPs(Subnetmask snm) {
@@ -128,8 +151,8 @@ public class Networks {
         return host;
     }
 
-    private void setNetworks(List<List<String>> networks) {
-        this.networks = networks;
+    private void setNetworksWithTitle(List<List<String>> networksWithTitle) {
+        this.networksWithTitle = networksWithTitle;
     }
 
     private void setHost(int host) {
